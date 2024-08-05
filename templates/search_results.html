@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results for "{{ query }}"{% endblock %}
+
+{% block content %}
+<h1>Search Results for "{{ query }}"</h1>
+
+{% if audio_results%}
+<h2>Audio Files</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for file in audio_results %}
+    <div class="col">
+        <div class="card h-100">
+            <a href="{{ url_for('play_audio', filename=file) }}" class="text-center">
+                <div class="thumbnail-wrapper">
+                    <img src="{{ url_for('static', filename='img/music.svg') }}" alt="{{ file }} thumbnail" class="thumbnail-img">
+                    <i class="bi bi-music-note-list thumbnail-icon"></i>
+                </div>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ file }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% if video_results %}
+<h2>Video Files</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for file in video_results %}
+    <div class="col">
+        <div class="card h-100">
+            <a href="{{ url_for('play_video', filename=file) }}" class="text-center">
+                <div class="thumbnail-wrapper">
+                    <img src="{{ url_for('static', filename='img/youtube.svg') }}" alt="{{ file }} thumbnail" class="thumbnail-img">
+                    <i class="bi bi-music-note-list thumbnail-icon"></i>
+                </div>
+            </a>
+            <div class="card-body">
+                <h5 class="card-title">{{ file }}</h5>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% if not audio_results or video_results %}
+<p>No results found for "{{ query }}". Try a different search term.</p>
+{% endif %}
+{% endblock %}

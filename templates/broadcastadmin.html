@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Live Broadcast - admin</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="media-player">
+                <audio id="broadcastAudio" controls autoplay loop class="w-100">
+                    <source src="{{ url_for('stream_broadcast') }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="mt-3">
+                <p>Live Broadcast: Enjoy the continuous stream of our audio broadcast. Everyone is hearing the same stream in real time.</p>
+            </div>
+            <a href="{{ url_for('explore') }}" class="btn btn-secondary mt-4">Back to Explore</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+<script>
+    const socket = io();
+    const audioElement = document.getElementById('broadcastAudio');
+
+    // Function to synchronize playback
+    function syncPlayback() {
+        socket.emit('sync', { currentTime: audioElement.currentTime });
+    }
+
+    // Handle synchronization data from the server
+    socket.on('sync', (data) => {
+        const diff = data.currentTime - audioElement.currentTime;
+        if (Math.abs(diff) > 1) { // Tolerance to avoid frequent updates
+            audioElement.currentTime += diff;
+        }
+    });
+
+    // Sync when playback starts or is resumed
+    audioElement.addEventListener('play', () => {
+        syncPlayback();
+    });
+
+    // Sync periodically
+    setInterval(syncPlayback, 5000); // Adjust interval as needed
+
+    // Ensure synchronization when the client connects
+    socket.on('connect', () => {
+        syncPlayback();
+    });
+</script>
+{% endblock %}

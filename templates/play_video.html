@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}MDH Streams - {{ filename }}{% endblock %}
+
+
+{% block content %}
+<h1>{{ filename }}</h1>
+    <video controls autoplay class="w-100" controlsList="nodownload">
+        <source src="{{ url_for('stream_video', filename=filename) }}" type="video/mp4">
+        Your browser does not support the video element.
+    </video>
+<div class="media-details mt-4">
+    <h5>Description</h5>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae eros ut mauris elementum commodo.</p>
+</div>
+<a href="{{ url_for('explore') }}" class="btn btn-secondary mt-4">Back to Explore</a>
+{% endblock %}

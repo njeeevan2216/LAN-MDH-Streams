@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}MDH Streams{% endblock %}
+
+{% block content %}
+<h1>Explore</h1>
+{% if audio_results or video_results %}
+<h2>Audio Files</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for file in audio_results %}
+    <div class="col">
+        <div class="card h-100">
+            <a href="{{ url_for('play_audio', filename=file) }}" class="text-center">
+                <div class="thumbnail-wrapper">
+                    <img src="{{ url_for('static', filename='img/music.svg') }}" alt="{{ file }} thumbnail" class="thumbnail-img thumbnail-center">
+                    <i class="bi bi-music-note-list thumbnail-icon"></i>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ file }}</h5>
+                </div>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+
+<h2>Video Files</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for file in video_results %}
+    <div class="col">
+        <div class="card h-100">
+            <a href="{{ url_for('play_video', filename=file) }}" class="text-center">
+                <div class="thumbnail-wrapper">
+                    <img src="{{ url_for('static', filename='img/youtube.svg') }}" alt="{{ file }} thumbnail" class="thumbnail-img thumbnail-center">
+                    <i class="bi bi-music-note-list thumbnail-icon"></i>
+                </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ file }}</h5>
+            </div>
+        </a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

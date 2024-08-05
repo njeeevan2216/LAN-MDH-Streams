@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <form class="d-flex mb-3" method="GET" action="{{ url_for('index') }}">
+    <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+</form>
+
+    <div class="col-md-8">
+        <h2 id="audio">Audio Files</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for file in audio_files %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ file }}</h5>
+                        <audio controls class="w-100">
+                            <source src="{{ url_for('stream_audio', filename=file) }}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <h2 id="video">Video Files</h2>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+            {% for file in video_files %}
+            <div class="col">
+                <div class="card h-100">
+                    <video controls class="w-100">
+                        <source src="{{ url_for('stream_video', filename=file) }}" type="video/mp4">
+                        Your browser does not support the video element.
+                    </video>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ file }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
