@@ -1,6 +1,5 @@
 from flask import Flask, render_template, send_from_directory, request, abort
-import os
-import webbrowser as wb
+import os   
 from datetime import datetime
 from flask_socketio import SocketIO, emit
 
@@ -153,5 +152,4 @@ def page_not_found(e):
     return render_template('error.html'), 404
 
 if __name__ == '__main__':
-    wb.open_new("http://{ip}/broadcast-admin".format(ip=ip))
     app.run(host='0.0.0.0', port=5000, debug=True)

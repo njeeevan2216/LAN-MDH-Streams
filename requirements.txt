@@ -1,1 +1,5 @@
-Flask
+Flask==2.3.2
+Flask-Mail==0.10.0
+Flask-SocketIO==5.3.6
+Flask-Uploads==0.2.1
+Flask-WTF==1.2.1
