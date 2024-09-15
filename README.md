@@ -2,7 +2,7 @@
 
 # LAN MDH Streams
 
-**LAN MDH Streams** is a fun project designed to stream music within a hotel LAN environment. This project uses the `Flask` library and `socketio` for live broadcasting, thanks to the idea from [@romulan-overlord](https://github.com/romulan-overlord). The live broadcast only transmits the timestamps of the audio, which clients use to synchronize playback.
+**LAN MDH Streams** is a fun project designed to stream music within a LAN environment. This project uses the `Flask` library and `socketio` for live broadcasting, thanks to the idea from [@romulan-overlord](https://github.com/romulan-overlord). The live broadcast only transmits the timestamps of the audio, which clients use to synchronize playback.
 
 ## Features
 
