@@ -12,7 +12,7 @@
 
 ## Live Demo
 
-- You can try out a live demo of the project at LAN MDH Streams Live.
+- You can try out a live demo of the project at [LAN MDH Streams Live](https://lan-mdh-streams-live.vercel.app/).
 
 ## Installation
 
